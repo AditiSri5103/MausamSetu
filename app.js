@@ -8,6 +8,7 @@ require("dotenv").config();
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.get("/", function (req, res) {
     res.sendFile(__dirname + "/index.html");
@@ -15,8 +16,8 @@ app.get("/", function (req, res) {
 });
 
 app.post("/", function (req, res) {
-    const query = req.body.cityName;
-    // console.log(query);
+    const query = req.body.city;
+    console.log(query);
     const apikey = process.env.API_KEY;
     const url = "https://api.openweathermap.org/data/2.5/weather?q=" + query + "&appid=" + apikey + "&units=metric";
 
@@ -27,23 +28,25 @@ app.post("/", function (req, res) {
                 const weatherData = JSON.parse(data);
     
                 if (+weatherData.cod !== 200) {
-                    return res.send(`<h2>Error: ${weatherData.message}</h2>`);
+                    return res.json({error:"City not found"});
                 }
     
                 const temp = weatherData.main.temp;
                 const humidity = weatherData.main.humidity;
                 const desc = weatherData.weather[0].description;
                 const iconCode = weatherData.weather[0].icon;
-                const iconurl = "http://openweathermap.org/img/wn/" + iconCode + "@2x.png";
+                const iconUrl = "http://openweathermap.org/img/wn/" + iconCode + "@2x.png";
 
-                res.write("<h1>Temperature in " + query + " is " + temp + "°C</h1>");
-                res.write("<p>Weather feels like " + desc + "</p>");
-                res.write("<p>Humidity is " + humidity + "%</p>");
-                res.write("<img src=" + iconurl + " />");
-                res.send();
+                res.json({
+                    city:query,
+                    temperature:temp,
+                    humid:humidity,
+                    description:desc,
+                    iconUrl:iconUrl
+                });
             } catch (error) {
                 console.error("Error parsing data:", error.message);
-                res.send("<h2>Something went wrong. Please try again.</h2>");
+                res.json({error:"Something went wrong. Please try again."});
             }
         });
     });
