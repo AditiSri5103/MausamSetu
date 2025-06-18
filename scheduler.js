@@ -1,8 +1,12 @@
 const cron = require("node-cron");
 const https = require("https");
 require("dotenv").config();
+const fs = require("fs");
+const sendSMS =require('./send-sms');
 
-let cities = ['Kanpur','abc', 'Jaipur', 'Bhopal', 'Sitamarhi','xyz'];
+const farmers=JSON.parse(fs.readFileSync("farmers-info.json","utf8"));
+const cities=[...new Set(farmers.map(f=>f.farmer_city))]
+console.log(cities)
 
 function checkWeather(city) {
   const apikey = process.env.API_KEY;
@@ -25,7 +29,7 @@ function checkWeather(city) {
 
         if (description.includes('rain')) {
           console.log(`🌧️ Rain predicted in ${city}. Notify farmers!`);
-          // TODO: Trigger email/SMS here
+          sendSMS(city);
         } else {
           console.log(`✅ No rain in ${city}.`);
         }

@@ -1,17 +1,27 @@
 [
   {
-    "farmer_name": "Samplename",
-    "farmer_city": "Samplecity",
-    "farmer_contact": "1234567890"
+    "farmer_name": "Ramesh",
+    "farmer_contact": "+91XXXXXXXXXX",
+    "farmer_city": "Kanpur"
   },
   {
-    "farmer_name": "xyz",
-    "farmer_city": "abc",
-    "farmer_contact": "djshfjf"
+    "farmer_name": "Suresh",
+    "farmer_contact": "+91YYYYYYYYYY",
+    "farmer_city": "Jaipur"
   },
   {
-    "farmer_name": "f1",
-    "farmer_city": "Sitamarhi",
-    "farmer_contact": "djshfjf"
+    "farmer_name": "Mahesh",
+    "farmer_contact": "+91ZZZZZZZZZZ",
+    "farmer_city": "Bhopal"
+  },
+  {
+    "farmer_name": "Rakesh",
+    "farmer_contact": "+91AAAAAAAAAA",
+    "farmer_city": "Daman"
+  },
+  {
+    "farmer_name": "Nimesh",
+    "farmer_city": "Cherrapunji",
+    "farmer_contact": "+91BBBBBBBBBB"
   }
 ]
