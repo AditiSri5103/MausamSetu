@@ -5,6 +5,7 @@ const https = require("https");
 const path = require("path")
 require("dotenv").config();
 const fs = require("fs")
+require('./scheduler')
 
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -55,6 +56,7 @@ app.post("/", function (req, res) {
         response.on("data", function (data) {
             try {
                 const weatherData = JSON.parse(data);
+                console.log(weatherData);
 
                 if (+weatherData.cod !== 200) {
                     return res.json({ error: "City not found" });
