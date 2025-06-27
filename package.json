@@ -2,9 +2,11 @@
   "dependencies": {
     "body-parser": "^1.20.1",
     "dotenv": "^16.5.0",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "node-cron": "^4.1.0",
+    "twilio": "^5.7.1"
   },
-  "scripts":{
-    "start":"node app.js"
+  "scripts": {
+    "start": "node app.js"
   }
 }
